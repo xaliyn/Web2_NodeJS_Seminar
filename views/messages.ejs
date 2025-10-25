@@ -1,0 +1,35 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:40px; text-align:center;">
+    <h2>Messages from Contact Form</h2>
+    <p>Below are all messages sent through the Contact menu, shown from newest to oldest.</p>
+
+    <% if (messages.length === 0) { %>
+      <p>No messages have been sent yet.</p>
+    <% } else { %>
+      <div style="overflow-x:auto; margin-top:20px;">
+        <table style="width:100%; border-collapse:collapse;">
+          <tr style="background:#f0f0f0;">
+            <th style="border:1px solid #ccc; padding:8px;">Name</th>
+            <th style="border:1px solid #ccc; padding:8px;">Email</th>
+            <th style="border:1px solid #ccc; padding:8px;">Subject</th>
+            <th style="border:1px solid #ccc; padding:8px;">Message</th>
+            <th style="border:1px solid #ccc; padding:8px;">Sent At</th>
+          </tr>
+          <% messages.forEach(msg => { %>
+            <tr>
+              <td style="border:1px solid #ccc; padding:8px;"><%= msg.name %></td>
+              <td style="border:1px solid #ccc; padding:8px;"><%= msg.email %></td>
+              <td style="border:1px solid #ccc; padding:8px;"><%= msg.subject %></td>
+              <td style="border:1px solid #ccc; padding:8px;"><%= msg.message %></td>
+              <td style="border:1px solid #ccc; padding:8px;"><%= msg.date %></td>
+            </tr>
+          <% }) %>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

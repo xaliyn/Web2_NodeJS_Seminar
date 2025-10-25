@@ -1,66 +1,66 @@
 <%- include('partials/header', { user: user }) %>
 
 <section class="main style1">
-  <div class="container" style="padding:40px;">
+  <div class="container" style="padding:40px; text-align:center;">
     <h2>Database Menu</h2>
-    <p>This page displays data loaded from three files: students, subjects, and marks.</p>
-
-    <hr>
+    <p>Below you can see data loaded from the student, subject, and marks tables.</p>
 
     <!-- Students Table -->
-    <h3>Students</h3>
-    <table style="width:100%; border-collapse:collapse;">
-      <tr style="background:#f0f0f0;">
-        <% Object.keys(students[0] || {}).forEach(key => { %>
-          <th style="border:1px solid #ccc; padding:8px;"><%= key %></th>
-        <% }) %>
-      </tr>
-      <% students.forEach(row => { %>
-        <tr>
-          <% Object.values(row).forEach(value => { %>
-            <td style="border:1px solid #ccc; padding:8px;"><%= value %></td>
+    <h3 style="margin-top:40px;">Students Table</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#f0f0f0;">
+          <% students.headers.forEach(h => { %>
+            <th style="border:1px solid #ccc; padding:8px;"><%= h %></th>
           <% }) %>
         </tr>
-      <% }) %>
-    </table>
-
-    <br><br>
+        <% students.rows.forEach(row => { %>
+          <tr>
+            <% students.headers.forEach(h => { %>
+              <td style="border:1px solid #ccc; padding:8px;"><%= row[h] %></td>
+            <% }) %>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
 
     <!-- Subjects Table -->
-    <h3>Subjects</h3>
-    <table style="width:100%; border-collapse:collapse;">
-      <tr style="background:#f0f0f0;">
-        <% Object.keys(subjects[0] || {}).forEach(key => { %>
-          <th style="border:1px solid #ccc; padding:8px;"><%= key %></th>
-        <% }) %>
-      </tr>
-      <% subjects.forEach(row => { %>
-        <tr>
-          <% Object.values(row).forEach(value => { %>
-            <td style="border:1px solid #ccc; padding:8px;"><%= value %></td>
+    <h3 style="margin-top:40px;">Subjects Table</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#f0f0f0;">
+          <% subjects.headers.forEach(h => { %>
+            <th style="border:1px solid #ccc; padding:8px;"><%= h %></th>
           <% }) %>
         </tr>
-      <% }) %>
-    </table>
-
-    <br><br>
+        <% subjects.rows.forEach(row => { %>
+          <tr>
+            <% subjects.headers.forEach(h => { %>
+              <td style="border:1px solid #ccc; padding:8px;"><%= row[h] %></td>
+            <% }) %>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
 
     <!-- Marks Table -->
-    <h3>Marks</h3>
-    <table style="width:100%; border-collapse:collapse;">
-      <tr style="background:#f0f0f0;">
-        <% Object.keys(marks[0] || {}).forEach(key => { %>
-          <th style="border:1px solid #ccc; padding:8px;"><%= key %></th>
-        <% }) %>
-      </tr>
-      <% marks.forEach(row => { %>
-        <tr>
-          <% Object.values(row).forEach(value => { %>
-            <td style="border:1px solid #ccc; padding:8px;"><%= value %></td>
+    <h3 style="margin-top:40px;">Marks Table</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#f0f0f0;">
+          <% marks.headers.forEach(h => { %>
+            <th style="border:1px solid #ccc; padding:8px;"><%= h %></th>
           <% }) %>
         </tr>
-      <% }) %>
-    </table>
+        <% marks.rows.forEach(row => { %>
+          <tr>
+            <% marks.headers.forEach(h => { %>
+              <td style="border:1px solid #ccc; padding:8px;"><%= row[h] %></td>
+            <% }) %>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
   </div>
 </section>
 

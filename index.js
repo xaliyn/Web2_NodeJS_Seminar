@@ -201,6 +201,36 @@ app.post('/contact', (req, res) => {
   });
 });
 
+// --- TASK 6: MESSAGES MENU (Admin + Registered users)
+app.get('/messages', (req, res) => {
+  const user = req.session.user;
+
+  // Access control: must be logged in
+  if (!user) return res.redirect('/login');
+
+  // Only registered users and admins can view
+  if (user.role !== 'registered' && user.role !== 'admin') {
+    return res.status(403).send('<h2>Access denied. You must be registered or admin.</h2>');
+  }
+
+  const filePath = path.join(__dirname, 'db', 'contacts.json');
+  if (!fs.existsSync(filePath)) {
+    return res.render('messages', { user, messages: [] });
+  }
+
+  const data = fs.readFileSync(filePath, 'utf8');
+  let messages = [];
+  if (data.trim() !== '') {
+    messages = JSON.parse(data);
+  }
+
+  // Sort newest first
+  messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  res.render('messages', { user, messages });
+});
+
+
 // ---------------------------
 //  START SERVER
 // ---------------------------

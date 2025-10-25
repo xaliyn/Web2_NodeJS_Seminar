@@ -40,9 +40,9 @@
       <% if (user.role === 'registered') { %>
         <a href="/messages">Messages</a>
       <% } %>
-      <% if (user.role === 'admin') { %>
-        <a href="/admin">Admin</a>
-      <% } %>
+      <% if (user && (user.role === 'registered' || user.role === 'admin')) { %>
+  <a href="/messages">Messages</a>
+    <% } %>
       <a href="/logout">Logout</a>
     <% } %>
   </nav>
