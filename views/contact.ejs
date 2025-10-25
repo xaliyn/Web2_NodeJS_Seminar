@@ -1,0 +1,30 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:40px; max-width:700px; text-align:center;">
+    <h2>Contact Us</h2>
+    <p>Send a message to the site owner using the form below.</p>
+
+    <% if (message) { %>
+      <p style="color:green; font-weight:bold;"><%= message %></p>
+    <% } %>
+
+    <form method="post" action="/contact" style="text-align:left;">
+      <label for="name"><strong>Name</strong></label><br>
+      <input type="text" id="name" name="name" placeholder="Your full name" required style="width:100%; padding:10px;"><br><br>
+
+      <label for="email"><strong>Email</strong></label><br>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required style="width:100%; padding:10px;"><br><br>
+
+      <label for="subject"><strong>Subject</strong></label><br>
+      <input type="text" id="subject" name="subject" placeholder="Message subject" style="width:100%; padding:10px;"><br><br>
+
+      <label for="message"><strong>Message</strong></label><br>
+      <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required style="width:100%; padding:10px;"></textarea><br><br>
+
+      <input type="submit" value="Send Message" class="button primary">
+    </form>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
