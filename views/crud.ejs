@@ -1,44 +1,53 @@
 <%- include('partials/header', { user: user }) %>
 
-<section class="main style1">
-  <div class="container" style="padding:40px; text-align:center;">
-    <h2>Student CRUD Menu</h2>
-    <p>Anyone can create, edit, or delete student records here.</p>
+<section>
+  <div style="margin: 40px auto; width: 80%;">
+    <h2 style="text-align: center;">CRUD – Students Table</h2>
+    <p style="text-align: center;">Manage student records below (connected to phpMyAdmin database).</p>
 
-    <!-- Add New Student -->
-    <form method="post" action="/crud/add" style="margin-top:20px;">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="text" name="class" placeholder="Class" required>
-      <input type="text" name="sex" placeholder="Sex" required>
-      <input type="submit" value="Add Student" class="button primary">
+    <!-- Add new student -->
+    <h3>Add a new student</h3>
+    <form action="/crud/add" method="POST" style="margin-bottom: 20px;">
+      <label>Student Name:</label>
+      <input type="text" name="sname" required>
+      <label>Class:</label>
+      <input type="text" name="class" required>
+      <label>Boy (1 = yes, 0 = no):</label>
+      <input type="number" name="boy" min="0" max="1" required>
+      <button type="submit">Add Record</button>
     </form>
 
-    <!-- Students Table -->
-    <div style="overflow-x:auto; margin-top:30px;">
-      <table style="width:100%; border-collapse:collapse;">
-        <tr style="background:#f0f0f0;">
+    <!-- Table of students -->
+    <table border="1" cellpadding="6" cellspacing="0" width="100%">
+      <thead style="background-color: #f0f0f0;">
+        <tr>
           <th>ID</th>
-          <th>Name</th>
+          <th>Student Name</th>
           <th>Class</th>
-          <th>Sex</th>
-          <th>Actions</th>
+          <th>Boy</th>
+          <th>Modify</th>
+          <th>Delete</th>
         </tr>
-        <% students.rows.forEach(student => { %>
-          <tr>
-            <form method="post" action="/crud/update/<%= student.id %>">
-              <td><%= student.id %></td>
-              <td><input type="text" name="name" value="<%= student.name %>" required></td>
-              <td><input type="text" name="class" value="<%= student.class %>" required></td>
-              <td><input type="text" name="sex" value="<%= student.sex %>" required></td>
-              <td>
-                <input type="submit" value="Update" class="button small">
-                <a href="/crud/delete/<%= student.id %>" class="button small" style="background:red; color:white;">Delete</a>
-              </td>
-            </form>
-          </tr>
-        <% }) %>
-      </table>
-    </div>
+      </thead>
+      <tbody>
+        <% if (students.length > 0) { %>
+          <% students.forEach(st => { %>
+            <tr>
+              <form action="/crud/update/<%= st.id %>" method="POST">
+                <td><%= st.id %></td>
+                <td><input type="text" name="sname" value="<%= st.sname %>" required></td>
+                <td><input type="text" name="class" value="<%= st.class %>" required></td>
+                <td><input type="number" name="boy" value="<%= st.boy %>" min="0" max="1" required></td>
+                <td><button type="submit">Modify</button></td>
+                <td><a href="/crud/delete/<%= st.id %>">Delete</a></td>
+              </form>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr><td colspan="6" style="text-align:center;">No students found.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
   </div>
 </section>
 
