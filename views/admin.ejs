@@ -1,0 +1,16 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:50px; text-align:center;">
+    <h2>Admin Panel</h2>
+    <p>Hello, <%= user.username %>. You have full administrative access.</p>
+    <ul style="list-style:none; padding:0;">
+      <li>Can manage registered users</li>
+      <li>Can access Messages and CRUD data</li>
+      <li>Can view all student and subject data</li>
+    </ul>
+    <a href="/dashboard" class="button">Back to Dashboard</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

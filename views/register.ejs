@@ -1,0 +1,18 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:50px; text-align:center;">
+    <h2>Create an Account</h2>
+    <% if (message) { %>
+      <p style="color:red;"><%= message %></p>
+    <% } %>
+    <form method="post" action="/register">
+      <input type="text" name="username" placeholder="Username" required><br><br>
+      <input type="password" name="password" placeholder="Password" required><br><br>
+      <input type="submit" value="Register" class="button primary">
+    </form>
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,20 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:50px; text-align:center;">
+    <h2>Welcome, <%= user.username %>!</h2>
+    <p>Your role: <strong><%= user.role %></strong></p>
+
+    <% if (user.role === 'registered') { %>
+      <a href="/messages" class="button">Messages Menu</a>
+    <% } %>
+
+    <% if (user.role === 'admin') { %>
+      <a href="/admin" class="button">Admin Menu</a>
+    <% } %>
+
+    <a href="/logout" class="button">Logout</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
