@@ -230,6 +230,78 @@ app.get('/messages', (req, res) => {
   res.render('messages', { user, messages });
 });
 
+// --- TASK 7: CRUD MENU (Accessible to Everyone) ---
+
+function readStudentsFile() {
+  const filePath = path.join(__dirname, 'db', 'students.txt');
+  if (!fs.existsSync(filePath)) return { headers: [], rows: [] };
+  const lines = fs.readFileSync(filePath, 'utf8').trim().split(/\r?\n/);
+  const headers = lines[0].split('\t');
+  const rows = lines.slice(1).map(line => {
+    const cols = line.split('\t');
+    const obj = {};
+    headers.forEach((h, i) => (obj[h.trim()] = cols[i] ? cols[i].trim() : ''));
+    return obj;
+  });
+  return { headers, rows };
+}
+
+function writeStudentsFile(data) {
+  const filePath = path.join(__dirname, 'db', 'students.txt');
+  if (data.length === 0) return;
+  const headers = Object.keys(data[0]);
+  const lines = [headers.join('\t')];
+  data.forEach(row => {
+    const line = headers.map(h => row[h]).join('\t');
+    lines.push(line);
+  });
+  fs.writeFileSync(filePath, lines.join('\n'));
+}
+
+// Show CRUD page (everyone can access)
+app.get('/crud', (req, res) => {
+  const students = readStudentsFile();
+  res.render('crud', { user: req.session.user, students });
+});
+
+// Add new student
+app.post('/crud/add', (req, res) => {
+  const students = readStudentsFile();
+  const newId =
+    students.rows.length > 0
+      ? (parseInt(students.rows.at(-1).id) + 1).toString()
+      : '1';
+  const { name, class: studentClass, sex } = req.body;
+
+  students.rows.push({ id: newId, name, class: studentClass, sex });
+  writeStudentsFile(students.rows);
+  res.redirect('/crud');
+});
+
+// Update student
+app.post('/crud/update/:id', (req, res) => {
+  const students = readStudentsFile();
+  const { name, class: studentClass, sex } = req.body;
+  const index = students.rows.findIndex((s) => s.id === req.params.id);
+  if (index !== -1) {
+    students.rows[index] = {
+      id: req.params.id,
+      name,
+      class: studentClass,
+      sex,
+    };
+    writeStudentsFile(students.rows);
+  }
+  res.redirect('/crud');
+});
+
+// Delete student
+app.get('/crud/delete/:id', (req, res) => {
+  const students = readStudentsFile();
+  const newRows = students.rows.filter((s) => s.id !== req.params.id);
+  writeStudentsFile(newRows);
+  res.redirect('/crud');
+});
 
 // ---------------------------
 //  START SERVER

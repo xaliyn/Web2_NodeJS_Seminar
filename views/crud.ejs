@@ -1,0 +1,45 @@
+<%- include('partials/header', { user: user }) %>
+
+<section class="main style1">
+  <div class="container" style="padding:40px; text-align:center;">
+    <h2>Student CRUD Menu</h2>
+    <p>Anyone can create, edit, or delete student records here.</p>
+
+    <!-- Add New Student -->
+    <form method="post" action="/crud/add" style="margin-top:20px;">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="class" placeholder="Class" required>
+      <input type="text" name="sex" placeholder="Sex" required>
+      <input type="submit" value="Add Student" class="button primary">
+    </form>
+
+    <!-- Students Table -->
+    <div style="overflow-x:auto; margin-top:30px;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#f0f0f0;">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Sex</th>
+          <th>Actions</th>
+        </tr>
+        <% students.rows.forEach(student => { %>
+          <tr>
+            <form method="post" action="/crud/update/<%= student.id %>">
+              <td><%= student.id %></td>
+              <td><input type="text" name="name" value="<%= student.name %>" required></td>
+              <td><input type="text" name="class" value="<%= student.class %>" required></td>
+              <td><input type="text" name="sex" value="<%= student.sex %>" required></td>
+              <td>
+                <input type="submit" value="Update" class="button small">
+                <a href="/crud/delete/<%= student.id %>" class="button small" style="background:red; color:white;">Delete</a>
+              </td>
+            </form>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
