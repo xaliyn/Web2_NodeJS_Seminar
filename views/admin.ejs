@@ -2,14 +2,23 @@
 
 <section class="main style1">
   <div class="container" style="padding:50px; text-align:center;">
-    <h2>Admin Panel</h2>
-    <p>Hello, <%= user.username %>. You have full administrative access.</p>
-    <ul style="list-style:none; padding:0;">
-      <li>Can manage registered users</li>
-      <li>Can access Messages and CRUD data</li>
-      <li>Can view all student and subject data</li>
-    </ul>
-    <a href="/dashboard" class="button">Back to Dashboard</a>
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, <strong><%= user.username %></strong>. You are logged in as an administrator.</p>
+
+    <hr style="margin:30px 0;">
+
+    <h3>Admin Menu</h3>
+    <p>The following administrative tools are available only for admin users.</p>
+
+    <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:15px; margin-top:25px;">
+      <a href="/messages" class="button">View Messages</a>
+      <a href="/crud" class="button">Manage Students (CRUD)</a>
+      <a href="/database" class="button">View Database</a>
+    </div>
+
+    <hr style="margin:30px 0;">
+
+    <p style="font-size:0.9em; color:gray;">Admin privileges allow full data management and system overview.</p>
   </div>
 </section>
 
