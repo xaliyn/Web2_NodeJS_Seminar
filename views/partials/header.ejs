@@ -28,26 +28,26 @@
 </head>
 <body>
   <nav>
-    <a href="/database">Database</a>
-    <a href="/contact">Contact</a>
-    <a href="/crud">CRUD Menu</a>
+    <a href="/app211/database">Database</a>
+    <a href="/app211/contact">Contact</a>
+    <a href="/app211/crud">CRUD Menu</a>
 
     <a href="/">Main Page</a>
     <% if (!user) { %>
-      <a href="/register">Register</a>
-      <a href="/login">Login</a>
+      <a href="/app211/register">Register</a>
+      <a href="/app211/login">Login</a>
     <% } else { %>
-      <a href="/dashboard">Dashboard</a>
+      <a href="/app211/dashboard">Dashboard</a>
       <% if (user.role === 'registered') { %>
-        <a href="/messages">Messages</a>
+        <a href="/app211/messages">Messages</a>
       <% } %>
       <% if (user && user.role === 'admin') { %>
-      <a href="/admin">Admin Page</a>
+      <a href="/app211/admin">Admin Page</a>
       <% } %>
 
       <% if (user && (user.role === 'registered' || user.role === 'admin')) { %>
-  <a href="/messages">Messages</a>
+  <a href="/app211/messages">Messages</a>
     <% } %>
-      <a href="/logout">Logout</a>
+      <a href="/app211/logout">Logout</a>
     <% } %>
   </nav>

@@ -7,7 +7,7 @@
 
     <!-- Add new student -->
     <h3>Add a new student</h3>
-    <form action="/crud/add" method="POST" style="margin-bottom: 20px;">
+    <form action="/app211/crud/add" method="POST" style="margin-bottom: 20px;">
       <label>Student Name:</label>
       <input type="text" name="sname" required>
       <label>Class:</label>
@@ -33,13 +33,13 @@
         <% if (students.length > 0) { %>
           <% students.forEach(st => { %>
             <tr>
-              <form action="/crud/update/<%= st.id %>" method="POST">
+              <form action="/app211/crud/update/<%= st.id %>" method="POST">
                 <td><%= st.id %></td>
                 <td><input type="text" name="sname" value="<%= st.sname %>" required></td>
                 <td><input type="text" name="class" value="<%= st.class %>" required></td>
                 <td><input type="number" name="boy" value="<%= st.boy %>" min="0" max="1" required></td>
                 <td><button type="submit">Modify</button></td>
-                <td><a href="/crud/delete/<%= st.id %>">Delete</a></td>
+                <td><a href="/app211/crud/delete/<%= st.id %>">Delete</a></td>
               </form>
             </tr>
           <% }) %>

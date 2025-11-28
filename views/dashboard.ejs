@@ -6,14 +6,14 @@
     <p>Your role: <strong><%= user.role %></strong></p>
 
     <% if (user.role === 'registered') { %>
-      <a href="/messages" class="button">Messages Menu</a>
+      <a href="/app211/messages" class="button">Messages Menu</a>
     <% } %>
 
     <% if (user.role === 'admin') { %>
-      <a href="/admin" class="button">Admin Menu</a>
+      <a href="/app211/admin" class="button">Admin Menu</a>
     <% } %>
 
-    <a href="/logout" class="button">Logout</a>
+    <a href="/app211/logout" class="button">Logout</a>
   </div>
 </section>
 
